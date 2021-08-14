@@ -36,19 +36,19 @@ body {
 
 .book-li-search-cr
 {
-  border: solid green 5px;
+  border: solid green 3px;
   margin: 10px;
 }
 
 .book-li-search-wr
 {
-  border: solid blue 5px;
+  border: solid blue 3px;
   margin: 10px;
 }
 
 .book-li-search-r
 {
-  border: solid lightsalmon 5px;
+  border: solid lightsalmon 3px;
   margin: 10px;
 }
 

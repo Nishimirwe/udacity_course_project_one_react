@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WTRead =({ReadsData, moveState, changeMove, moveItem})=> 
+const WTRead =({ReadsData,ctgr, moveState, changeMove, moveItem, setCurrentCtgr})=> 
 {
     return (<div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
@@ -10,12 +10,11 @@ const WTRead =({ReadsData, moveState, changeMove, moveItem})=>
                     <ol className="books-grid">
                     {ReadsData.map((wData,windex)=>(
                         <span>
-                          {moveState !== "no" ?
+                          {moveState !== "no" && moveState!=="none" && moveState!=="none" && moveState!=="move" && ctgr==="wr" ?
                         <center className="move-btn"><button onClick={(e)=>moveItem(wData)}>CONFIRM A MOVE</button></center>
                         :
                         <span></span>  
                         }
-                          
                           
                         <li key={windex} className="book-li">
                         <div className="book">
@@ -23,7 +22,7 @@ const WTRead =({ReadsData, moveState, changeMove, moveItem})=>
                             <div className="book-cover" style={wData.url}></div>
                             
                             <div className="book-shelf-changer">
-                              <select onChange={(e)=>changeMove(e)}>
+                              <select onChange={(e)=>changeMove(e)} onMouseOver={()=>setCurrentCtgr()}>
                                 <option value="move">Move to...</option>
                                 <option value="cr">Currently Reading</option>
                                 <option value="r">Read</option>

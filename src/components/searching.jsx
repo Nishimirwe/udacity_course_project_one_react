@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Search =({changePages, search, dataSe, Reads, WantToRead, CurrentlyReading})=>
+const Search =({changePages, search, dataSe, Reads, WantToRead,moveItem, CurrentlyReading, moveState,changeMove, resetMove, ctgr, setCurrentCtgrP})=>
 {
     return (
         <div className="search-books">
@@ -32,14 +32,22 @@ const Search =({changePages, search, dataSe, Reads, WantToRead, CurrentlyReading
             {CurrentlyReading.filter((data)=>(data.author.toLowerCase().includes(""+dataSe.toLowerCase()) || data.title.toLowerCase().includes(""+dataSe.toLowerCase()))).map((crData,crindex)=>(
            <span>
              {dataSe.length!==0 ?
-             <li key={crindex} className="book-li-search-cr">
+             <span>
+               {moveState !== "no" && moveState!=="none" && moveState!=="none" && moveState!=="move" && ctgr==="cr"?
+               <center className="move-btn"><button onClick={(e)=>moveItem(crData,ctgr)}>CONFIRM A MOVE</button></center>
+               :
+               <span></span>
+              }
              
+             <li key={crindex} className="book-li-search-cr">
+            
+            
              <div className="book">
                <div className="book-top">
                  <div className="book-cover" style={crData.url}></div>
                  
                  <div className="book-shelf-changer">
-                   <select>
+                   <select onChange={(e)=>changeMove(e)} onMouseOver={()=>setCurrentCtgrP("cr")}>
                      <option value="move">Move to...</option>
                      <option value="wr">Want to Read</option>
                      <option value="r">Read</option>
@@ -52,6 +60,7 @@ const Search =({changePages, search, dataSe, Reads, WantToRead, CurrentlyReading
                <div className="book-authors">{crData.author}</div>
              </div>
            </li>
+           </span>
              :
              <p>
               {/* No data to display if a user is not typing in search */}
@@ -77,6 +86,13 @@ const Search =({changePages, search, dataSe, Reads, WantToRead, CurrentlyReading
             {WantToRead.filter((data)=>(data.author.toLowerCase().includes(""+dataSe.toLowerCase()) || data.title.toLowerCase().includes(""+dataSe.toLowerCase()))).map((crData,crindex)=>(
            <span>
              {dataSe.length!==0 ?
+
+             <span>
+                {moveState !== "no" && moveState!=="none" && moveState!=="none" && moveState!=="move" && ctgr==="wr"?
+               <center className="move-btn"><button onClick={(e)=>moveItem(crData,ctgr)}>CONFIRM A MOVE</button></center>
+               :
+               <span></span>
+              }
              <li key={crindex} className="book-li-search-wr">
              
              <div className="book">
@@ -84,9 +100,9 @@ const Search =({changePages, search, dataSe, Reads, WantToRead, CurrentlyReading
                  <div className="book-cover" style={crData.url}></div>
                  
                  <div className="book-shelf-changer">
-                   <select>
+                   <select onChange={(e)=>changeMove(e)} onMouseOver={()=>setCurrentCtgrP("wr")}>
                      <option value="move">Move to...</option>
-                     <option value="wr">Want to Read</option>
+                     <option value="cr">Currently Reading</option>
                      <option value="r">Read</option>
                      <option value="none">None</option>
                    </select>
@@ -97,6 +113,7 @@ const Search =({changePages, search, dataSe, Reads, WantToRead, CurrentlyReading
                <div className="book-authors">{crData.author}</div>
              </div>
            </li>
+           </span>
              :
              <p>
               {/* No data to display if a user is not typing in search */}
@@ -124,17 +141,25 @@ const Search =({changePages, search, dataSe, Reads, WantToRead, CurrentlyReading
             {Reads.filter((data)=>(data.author.toLowerCase().includes(""+dataSe.toLowerCase()) || data.title.toLowerCase().includes(""+dataSe.toLowerCase()))).map((crData,crindex)=>(
            <span>
              {dataSe.length!==0 ?
+
+             <span>
+                {moveState !== "no" && moveState!=="none" && moveState!=="none" && moveState!=="move" && ctgr==="r"?
+               <center className="move-btn"><button onClick={(e)=>moveItem(crData,ctgr)}>CONFIRM A MOVE</button></center>
+               :
+               <span></span>
+              }
              <li key={crindex} className="book-li-search-r">
              
+
              <div className="book">
                <div className="book-top">
                  <div className="book-cover" style={crData.url}></div>
                  
                  <div className="book-shelf-changer">
-                   <select>
+                   <select onChange={(e)=>changeMove(e)} onMouseOver={()=>setCurrentCtgrP("r")}>
                      <option value="move">Move to...</option>
+                     <option value="cr">Currently Reading</option>
                      <option value="wr">Want to Read</option>
-                     <option value="r">Read</option>
                      <option value="none">None</option>
                    </select>
                  </div>
@@ -144,6 +169,7 @@ const Search =({changePages, search, dataSe, Reads, WantToRead, CurrentlyReading
                <div className="book-authors">{crData.author}</div>
              </div>
            </li>
+           </span>
              :
              <p>
               {/* No data to display if a user is not typing in search */}
@@ -153,7 +179,6 @@ const Search =({changePages, search, dataSe, Reads, WantToRead, CurrentlyReading
             ))}
           
           </ol>
-
 
         </div>
       </div>
