@@ -1,3 +1,8 @@
+/*
+Ever wish to know how the system works before hand? Great, you got check the last section of the project README file.
+
+Enjoy the exploration.
+*/
 import React from 'react'
 // import * as BooksAPI from './BooksAPI'
 import './App.css';
