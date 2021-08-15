@@ -1,7 +1,12 @@
+/*
+Ever wish to know how the system works before hand? Great, you got check the last section of the project README file.
+
+Enjoy the exploration.
+*/
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Search =({changePages, search, dataSe, Reads, WantToRead,moveItem, CurrentlyReading, moveState,changeMove, resetMove, ctgr, setCurrentCtgrP})=>
+const Search =({changePages, search, currentBook, setCurrentBook, dataSe, Reads, WantToRead,moveItem, CurrentlyReading, moveState,changeMove, ctgr, setCurrentCtgrP})=>
 {
     return (
         <div className="search-books">
@@ -21,7 +26,7 @@ const Search =({changePages, search, dataSe, Reads, WantToRead,moveItem, Current
               <span></span>:
               
               <span id="cr-search-header">
-                CURRENTLY READING CATEGORY
+                CURRENTLY READING CATEGORY 
                 </span>}
             </p>
         </center>
@@ -34,7 +39,8 @@ const Search =({changePages, search, dataSe, Reads, WantToRead,moveItem, Current
              {dataSe.length!==0 ?
              <span>
                {moveState !== "no" && moveState!=="none" && moveState!=="none" && moveState!=="move" && ctgr==="cr"?
-               <center className="move-btn"><button onClick={(e)=>moveItem(crData,ctgr)}>CONFIRM A MOVE</button></center>
+               <center className="move-btn"><button style={currentBook===crData.id ? {display: "block"}: {display: "none"}} 
+               onClick={(e)=>moveItem(crData,ctgr)}>CONFIRM A MOVE</button></center>
                :
                <span></span>
               }
@@ -47,7 +53,7 @@ const Search =({changePages, search, dataSe, Reads, WantToRead,moveItem, Current
                  <div className="book-cover" style={crData.url}></div>
                  
                  <div className="book-shelf-changer">
-                   <select onChange={(e)=>changeMove(e)} onMouseOver={()=>setCurrentCtgrP("cr")}>
+                   <select onChange={(e)=>changeMove(e)} onMouseOver={()=>{setCurrentBook(crData); setCurrentCtgrP("cr")}}>
                      <option value="move">Move to...</option>
                      <option value="wr">Want to Read</option>
                      <option value="r">Read</option>
@@ -89,7 +95,8 @@ const Search =({changePages, search, dataSe, Reads, WantToRead,moveItem, Current
 
              <span>
                 {moveState !== "no" && moveState!=="none" && moveState!=="none" && moveState!=="move" && ctgr==="wr"?
-               <center className="move-btn"><button onClick={(e)=>moveItem(crData,ctgr)}>CONFIRM A MOVE</button></center>
+               <center className="move-btn"><button style={currentBook===crData.id ? {display: "block"}: {display: "none"}}
+                onClick={(e)=>moveItem(crData,ctgr)}>CONFIRM A MOVE</button></center>
                :
                <span></span>
               }
@@ -100,7 +107,7 @@ const Search =({changePages, search, dataSe, Reads, WantToRead,moveItem, Current
                  <div className="book-cover" style={crData.url}></div>
                  
                  <div className="book-shelf-changer">
-                   <select onChange={(e)=>changeMove(e)} onMouseOver={()=>setCurrentCtgrP("wr")}>
+                   <select onChange={(e)=>changeMove(e)} onMouseOver={()=>{setCurrentBook(crData); setCurrentCtgrP("wr")}}>
                      <option value="move">Move to...</option>
                      <option value="cr">Currently Reading</option>
                      <option value="r">Read</option>
@@ -144,7 +151,8 @@ const Search =({changePages, search, dataSe, Reads, WantToRead,moveItem, Current
 
              <span>
                 {moveState !== "no" && moveState!=="none" && moveState!=="none" && moveState!=="move" && ctgr==="r"?
-               <center className="move-btn"><button onClick={(e)=>moveItem(crData,ctgr)}>CONFIRM A MOVE</button></center>
+               <center className="move-btn"><button style={currentBook===crData.id ? {display: "block"}: {display: "none"}}
+                onClick={(e)=>moveItem(crData,ctgr)}>CONFIRM A MOVE</button></center>
                :
                <span></span>
               }
@@ -156,7 +164,7 @@ const Search =({changePages, search, dataSe, Reads, WantToRead,moveItem, Current
                  <div className="book-cover" style={crData.url}></div>
                  
                  <div className="book-shelf-changer">
-                   <select onChange={(e)=>changeMove(e)} onMouseOver={()=>setCurrentCtgrP("r")}>
+                   <select onChange={(e)=>changeMove(e)} onMouseOver={()=>{setCurrentBook(crData); setCurrentCtgrP("r")}}>
                      <option value="move">Move to...</option>
                      <option value="cr">Currently Reading</option>
                      <option value="wr">Want to Read</option>

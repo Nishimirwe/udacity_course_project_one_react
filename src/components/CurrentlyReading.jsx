@@ -1,6 +1,6 @@
 import React from "react";
 
-const CReading =({ReadsData, ctgr, moveState, changeMove, moveItem, setCurrentCtgr})=> 
+const CReading =({ReadsData, ctgr, moveState, changeMove, moveItem, setCurrentCtgr, setCurrentBook, currentBook})=> 
 {
     const element=<div className="bookshelf">
 
@@ -15,8 +15,9 @@ const CReading =({ReadsData, ctgr, moveState, changeMove, moveItem, setCurrentCt
         <ol className="books-grid">
         {ReadsData.map((crData,crindex)=>(
           <span>
-            {moveState !== "no" && moveState!=="none" && moveState!=="none" && moveState!=="move" && ctgr==="cr" ?
-            <center className="move-btn"><button onClick={(e)=>moveItem(crData)}>CONFIRM A MOVE</button></center>
+            {moveState !== "no" && moveState!=="none" && moveState!=="move" && ctgr==="cr" ?
+            <center className="move-btn"><button style={currentBook===crData.id ? {display: "block"}: {display: "none"}}
+             id={crData.id} onClick={(e)=>moveItem(crData)}>CONFIRM A MOVE</button></center>
             
             :
 
@@ -29,7 +30,7 @@ const CReading =({ReadsData, ctgr, moveState, changeMove, moveItem, setCurrentCt
                 <div className="book-cover" style={crData.url}></div>
                 
                 <div className="book-shelf-changer">
-                  <select onChange={(e)=>changeMove(e)} onMouseOver={setCurrentCtgr}>
+                  <select onChange={(e)=>changeMove(e)} onMouseOver={()=>{setCurrentBook(crData); setCurrentCtgr()}}>
                     <option value="move">Move to...</option>
                     <option value="wr">Want to Read</option>
                     <option value="r">Read</option>
